@@ -1,0 +1,61 @@
+title: Anemone
+tagline: Analog perspective.
+description: An ultra-minimal, hypermedia-focused magazine site for Anemone.
+url: "https://anemonereview.com"
+baseurl: ""
+
+# Site Branding & Media
+logo: "asset/anemonelogo1.png"
+favicon: "asset/anemonelogo1.png"
+
+# Typography & Aesthetic Parameters
+font_family: "'Atkinson Hyperlegible', sans-serif"
+
+# Color Palette (Dark Gothic - Solid Colors, No Complex Gradients)
+colors:
+  bg_primary: "#0c0c0e"
+  bg_secondary: "#141417"
+  text_primary: "#e2e0d8"
+  text_muted: "#9c9a92"
+  accent_crimson: "#9e2a2b"
+  accent_crimson_hover: "#c1121f"
+  border_color: "#26262a"
+
+# Table of Contents Rotations
+rotation_left: "-1.8deg"
+rotation_right: "1.5deg"
+
+# Table of Contents Items
+toc_items:
+  - title: "Letter from the Editor"
+    slug: "editor-letter"
+    url: "pages/editor-letter.html"
+    type: "page"
+    rotation: "left"
+  - title: "Submission Guidelines"
+    slug: "submission"
+    url: "pages/submission.html"
+    type: "page"
+    rotation: "right"
+  - title: "Advertise & Patronage"
+    slug: "advertise"
+    url: "pages/advertise.html"
+    type: "page"
+    rotation: "left"
+  - title: "Issue Archive (Vol. 1, No. 1)"
+    slug: "download"
+    url: "pages/download.html"
+    type: "page"
+    rotation: "right"
+  - title: "Blog Dispatches (.docx Reader)"
+    slug: "blog-dispatches"
+    url: "#blog-dispatches"
+    type: "blog_index"
+    rotation: "left"
+
+# Build Settings
+markdown: kramdown
+permalink: /:categories/:title/
+include:
+  - asset
+  - blogs
