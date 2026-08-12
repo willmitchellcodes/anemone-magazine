@@ -1,8 +1,8 @@
 # Anemone Magazine - Site Configuration
 title: "Anemone"
 description: "Analog perspective."
-url: "" # host url
-baseurl: "" # subpath if any
+url: "https://willmitchellcodes.github.io" # GitHub Pages domain
+baseurl: "/anemone-magazine" # Repository name on GitHub Pages
 
 # Author / Editorial Info
 editor_email: "staff@anemonereview.com"
@@ -15,7 +15,7 @@ bg_color: "#f7f7f5"
 text_color: "#121212"
 accent_color: "#000000"
 
-# TOC Links & Parameters (Fixed permalinks ending in .html)
+# TOC Links & Parameters
 toc_links:
   - title: "Main / Home"
     url: "/"
