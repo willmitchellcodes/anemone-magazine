@@ -6,7 +6,7 @@
       {% if page.url == item.url or page.url == item.url | append: ".html" or page.url == item.url | append: "/" %}
         {% assign is_active = true %}
       {% endif %}
-      <a href="{{ item.url | relative_url }}" class="toc-link{% if is_active %} active{% endif %}">
+      <a href="{{ site.baseurl }}{{ item.url }}" class="toc-link{% if is_active %} active{% endif %}">
         {{ item.title }}
       </a>
     {% endfor %}

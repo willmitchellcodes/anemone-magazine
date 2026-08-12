@@ -2,7 +2,7 @@
 title: "Anemone"
 description: "Analog perspective."
 url: "https://willmitchellcodes.github.io" # GitHub Pages domain
-baseurl: "/anemone-magazine" # Repository name on GitHub Pages
+baseurl: "" # Empty so GitHub Pages auto-sets subpath without doubling it
 
 # Author / Editorial Info
 editor_email: "staff@anemonereview.com"

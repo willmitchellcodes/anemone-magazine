@@ -22,14 +22,14 @@ permalink: /blogs.html
 
 </div>
 
-<script src="{{ '/assets/js/docx-blog-parser.js' | relative_url }}"></script>
+<script src="{{ site.baseurl }}/assets/js/docx-blog-parser.js"></script>
 <script>
   document.addEventListener('DOMContentLoaded', function() {
     // List of .docx files in docx_blogs folder
     const docxFiles = [
-      "{{ '/docx_blogs/montana_field_notes.docx' | relative_url }}",
-      "{{ '/docx_blogs/analog_reflections.docx' | relative_url }}",
-      "{{ '/docx_blogs/the_mountain_journal.docx' | relative_url }}"
+      "{{ site.baseurl }}/docx_blogs/montana_field_notes.docx",
+      "{{ site.baseurl }}/docx_blogs/analog_reflections.docx",
+      "{{ site.baseurl }}/docx_blogs/the_mountain_journal.docx"
     ];
     loadDocxBlogs(docxFiles);
   });
