@@ -1,0 +1,36 @@
+---
+layout: default
+title: "Docx Blog Archive"
+subtitle: "Parsing folder of .docx blog entries dynamically."
+permalink: /blogs.html
+---
+
+<div class="blog-layout-container" id="docx-blog-container">
+
+  <p style="margin-bottom: 2rem; color: var(--muted-color);">
+    This page parses a directory of <code>.docx</code> documents directly in browser raw JavaScript with zero third-party dependencies, pulling the first line of each document as its title.
+  </p>
+
+  <div id="docx-blog-list" class="docx-blog-list">
+    <p>Loading blogs...</p>
+  </div>
+
+  <div id="docx-viewer" class="docx-viewer">
+    <button class="docx-back-btn" onclick="closeDocxViewer()">&larr; Back to Docx Blog List</button>
+    <div id="docx-post-content" class="blog-post-body"></div>
+  </div>
+
+</div>
+
+<script src="{{ '/assets/js/docx-blog-parser.js' | relative_url }}"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // List of .docx files in docx_blogs folder
+    const docxFiles = [
+      "{{ '/docx_blogs/montana_field_notes.docx' | relative_url }}",
+      "{{ '/docx_blogs/analog_reflections.docx' | relative_url }}",
+      "{{ '/docx_blogs/the_mountain_journal.docx' | relative_url }}"
+    ];
+    loadDocxBlogs(docxFiles);
+  });
+</script>

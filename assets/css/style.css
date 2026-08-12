@@ -1,404 +1,362 @@
-/* ==========================================================================
-   ANEMONE MAGAZINE - ULTRA MINIMAL HYPERMEDIA DESIGN SYSTEM
-   Font: Atkinson Hyperlegible
-   Aesthetic: Dark Gothic Minimal, High Readability & User Affordance
-   ========================================================================== */
-
+/* Anemone Magazine - Minimalist Hypermedia Stylesheet */
 @import url('https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
 :root {
-  --bg-primary: #0c0c0e;
-  --bg-secondary: #141417;
-  --bg-card: #18181c;
-  --text-primary: #e2e0d8;
-  --text-muted: #9c9a92;
-  --text-dim: #6e6d66;
-  --accent-crimson: #9e2a2b;
-  --accent-crimson-hover: #c1121f;
-  --border-color: #26262a;
-  --border-active: #3a3a42;
-  --font-main: 'Atkinson Hyperlegible', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  
-  --rotation-left: -1.8deg;
-  --rotation-right: 1.5deg;
-  --logo-size: 80px;
+  --font-sans: 'Atkinson Hyperlegible', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --bg-color: #f7f7f5;
+  --text-color: #121212;
+  --accent-color: #000000;
+  --muted-color: #555555;
+  --border-color: #121212;
+  --card-bg: #ffffff;
+
+  --header-height: 180px;
+  --sidebar-width: 320px;
+  --content-max-width: 860px;
+  --blog-max-width: 720px;
 }
 
-/* Base Resets & Global Styles */
-*, *::before, *::after {
+* {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
-html {
-  font-family: var(--font-main);
-  background-color: var(--bg-primary);
-  color: var(--text-primary);
-  font-size: 16px;
-  line-height: 1.6;
-  scroll-behavior: smooth;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
+html,
 body {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  background-color: var(--bg-primary);
-  color: var(--text-primary);
-  overflow-x: hidden;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-family: var(--font-sans);
+  font-size: 18px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
 }
 
-/* Links & User Affordances */
-a {
-  color: var(--text-primary);
-  text-decoration: none;
-  transition: color 0.15s ease, transform 0.2s ease, border-color 0.15s ease;
-}
-
-a:hover, a:focus-visible {
-  color: var(--accent-crimson-hover);
-  outline: none;
-}
-
-a:focus-visible {
-  outline: 2px solid var(--accent-crimson);
-  outline-offset: 4px;
-}
-
-/* ==========================================================================
-   FIXED TOP-LEFT LOGO (Rule Constraint)
-   ========================================================================== */
-.fixed-logo-header {
+/* Fixed Header - Top-Left Logo (Covering 3/4 width up to TOC right column) */
+.site-header {
   position: fixed;
-  top: 1.5rem;
-  left: 1.5rem;
-  z-index: 1000;
+  top: 0;
+  left: 0;
+  width: calc(100vw - var(--sidebar-width));
+  height: var(--header-height);
+  background-color: var(--bg-color);
+  z-index: 999;
   display: flex;
   align-items: center;
-  gap: 1rem;
-  background: rgba(12, 12, 14, 0.85);
-  backdrop-filter: blur(8px);
-  padding: 0.5rem 0.75rem;
-  border: 1px solid var(--border-color);
-  border-radius: 2px;
+  justify-content: flex-start;
+  padding: 1rem 2.5rem;
+  border-bottom: 1px solid var(--border-color);
 }
 
-.fixed-logo-header img {
-  height: auto;
-  max-height: 48px;
-  width: auto;
+.logo-link {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  text-decoration: none;
+}
+
+.site-logo {
+  width: 100%;
+  max-width: 90%;
+  max-height: 150px;
   object-fit: contain;
+  object-position: left center;
   display: block;
 }
 
-.fixed-logo-header .site-title {
-  font-size: 1.1rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--text-primary);
-}
-
-.fixed-logo-header .site-tagline {
-  font-size: 0.75rem;
-  color: var(--text-muted);
-  font-style: italic;
-  display: block;
-}
-
-/* ==========================================================================
-   MAIN HYPERMEDIA LAYOUT
-   - Left fixed logo column (~1/4 offset)
-   - Right ~3/4 column based table of contents & flexboxed content
-   ========================================================================== */
+/* Main Layout Wrapper */
 .site-layout {
+  margin-top: var(--header-height);
+  display: flex;
+  flex-direction: row;
+  min-height: calc(100vh - var(--header-height));
+  width: 100%;
+}
+
+/* Main Flexbox Content Container (Left Side, Scrolls Independently) */
+.main-content {
+  flex: 1;
+  margin-right: var(--sidebar-width);
+  padding: 3rem 4rem;
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
-  padding-top: 6rem; /* space for fixed logo */
+  max-width: calc(100vw - var(--sidebar-width));
 }
 
-@media (min-width: 860px) {
-  .site-layout {
-    display: grid;
-    grid-template-columns: 240px 1fr;
-    gap: 2.5rem;
-    max-width: 1400px;
-    margin: 0 auto;
-    width: 100%;
-    padding: 6rem 2.5rem 3rem 2.5rem;
-  }
-}
-
-/* Left Sidebar Area (Under static logo) */
-.layout-sidebar {
+/* Sidebar Column - Table of Contents (Fixed Right Column, Flush with Top & Logo) */
+.toc-sidebar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: var(--sidebar-width);
+  min-width: var(--sidebar-width);
+  height: 100vh;
+  padding: 2.5rem 1.5rem;
+  border-left: 1px solid var(--border-color);
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
-  padding-left: 0.5rem;
+  gap: 2rem;
+  background-color: var(--bg-color);
+  overflow-y: auto;
+  z-index: 1000;
 }
 
-.sidebar-metadata {
-  font-size: 0.85rem;
-  color: var(--text-muted);
-  border-left: 2px solid var(--accent-crimson);
-  padding-left: 0.75rem;
+.toc-title {
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-weight: 700;
+  color: var(--muted-color);
+  margin-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 0.3rem;
 }
 
-/* ==========================================================================
-   TABLE OF CONTENTS (TOC) - COLUMN BASED WITH OFF-CENTER ROTATIONS
-   Occupies the main right ~3/4 section of page
-   ========================================================================== */
-.toc-section {
+.toc-nav {
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
-  margin-bottom: 3rem;
+  align-items: flex-start;
 }
 
-.toc-header {
-  font-size: 0.8rem;
-  text-transform: uppercase;
-  letter-spacing: 0.2em;
-  color: var(--text-dim);
-  border-bottom: 1px solid var(--border-color);
-  padding-bottom: 0.5rem;
-  margin-bottom: 0.5rem;
-}
-
-.toc-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: 1.5rem;
-  align-items: stretch;
-}
-
-/* Off-center rotated link cards */
-.toc-card {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  background-color: var(--bg-secondary);
-  border: 1px solid var(--border-color);
-  padding: 1.25rem 1.5rem;
-  border-radius: 2px;
-  cursor: pointer;
-  transform-origin: center center;
-  transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1), 
-              border-color 0.2s ease, 
-              background-color 0.2s ease,
-              box-shadow 0.2s ease;
-}
-
-/* Alternating ROTATION angles (Rule requirement) */
-.toc-card.rotate-left {
-  transform: rotate(var(--rotation-left));
-}
-
-.toc-card.rotate-right {
-  transform: rotate(var(--rotation-right));
-}
-
-.toc-card:hover, .toc-card:focus-within, .toc-card.active {
-  transform: rotate(0deg) translateY(-2px);
-  border-color: var(--accent-crimson);
-  background-color: var(--bg-card);
-}
-
-.toc-card .toc-number {
-  font-size: 0.75rem;
+/* TOC Links - Slightly Off-Center Rotated */
+.toc-link {
+  display: inline-block;
+  font-family: var(--font-sans);
   font-weight: 700;
-  letter-spacing: 0.15em;
-  color: var(--accent-crimson);
-  margin-bottom: 0.5rem;
-}
-
-.toc-card .toc-title {
-  font-size: 1.15rem;
-  font-weight: 700;
-  color: var(--text-primary);
-  line-height: 1.3;
-}
-
-.toc-card .toc-desc {
-  font-size: 0.85rem;
-  color: var(--text-muted);
-  margin-top: 0.5rem;
-}
-
-/* ==========================================================================
-   HYPERMEDIA CONTENT DISPLAY AREA (Flexboxed below/beside logo & TOC)
-   ========================================================================== */
-.content-area {
-  display: flex;
-  flex-direction: column;
-  background-color: var(--bg-secondary);
-  border: 1px solid var(--border-color);
-  padding: 2.5rem;
-  border-radius: 2px;
-  min-height: 420px;
-  margin-top: 1rem;
-}
-
-.content-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  border-bottom: 1px solid var(--border-color);
-  padding-bottom: 1rem;
-  margin-bottom: 2rem;
-}
-
-.content-header h1, .content-header h2 {
-  font-size: 1.8rem;
-  font-weight: 700;
-  color: var(--text-primary);
-  letter-spacing: -0.01em;
-}
-
-.content-header .content-badge {
-  font-size: 0.75rem;
-  text-transform: uppercase;
-  letter-spacing: 0.15em;
-  color: var(--accent-crimson);
-  border: 1px solid var(--accent-crimson);
-  padding: 0.2rem 0.6rem;
-  border-radius: 2px;
-}
-
-/* ==========================================================================
-   REGULAR BLOG PATTERN (Centered Text Layout)
-   ========================================================================== */
-.blog-article, .blog-container {
-  max-width: 680px;
-  margin: 0 auto;
-  width: 100%;
-  text-align: left;
-}
-
-.blog-article h1 {
-  font-size: 2rem;
-  font-weight: 700;
-  line-height: 1.25;
-  margin-bottom: 0.75rem;
-  color: var(--text-primary);
-}
-
-.blog-article .blog-meta {
-  font-size: 0.85rem;
-  color: var(--text-muted);
-  border-bottom: 1px solid var(--border-color);
-  padding-bottom: 1rem;
-  margin-bottom: 2rem;
-}
-
-.blog-article p {
   font-size: 1.1rem;
-  line-height: 1.75;
+  color: var(--text-color);
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  transform-origin: center center;
+  width: 95%;
+  word-break: break-word;
+}
+
+/* Alternating rotations for raw minimal aesthetic */
+.toc-link:nth-child(1) {
+  transform: rotate(-1.8deg);
+}
+
+.toc-link:nth-child(2) {
+  transform: rotate(2.1deg);
+}
+
+.toc-link:nth-child(3) {
+  transform: rotate(-1.2deg);
+}
+
+.toc-link:nth-child(4) {
+  transform: rotate(1.9deg);
+}
+
+.toc-link:nth-child(5) {
+  transform: rotate(-2.4deg);
+}
+
+.toc-link:nth-child(6) {
+  transform: rotate(1.4deg);
+}
+
+.toc-link.active {
+  background-color: var(--accent-color);
+  color: #ffffff;
+  transform: rotate(0deg);
+}
+
+.toc-info {
+  margin-top: auto;
+  font-size: 0.85rem;
+  color: var(--muted-color);
+  border-top: 1px solid var(--border-color);
+  padding-top: 1rem;
+  line-height: 1.4;
+}
+
+.page-header {
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid var(--border-color);
+}
+
+.page-title {
+  font-size: 2.2rem;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+.page-meta {
+  font-size: 0.95rem;
+  color: var(--muted-color);
+  margin-top: 0.5rem;
+  font-weight: 400;
+}
+
+/* Standard Content Typography */
+.content-body p {
   margin-bottom: 1.5rem;
-  color: var(--text-primary);
+  text-align: justify;
 }
 
-.blog-article blockquote {
-  border-left: 3px solid var(--accent-crimson);
-  padding-left: 1.25rem;
-  margin: 1.75rem 0;
-  font-style: italic;
-  color: var(--text-muted);
+.content-body h1,
+.content-body h2,
+.content-body h3 {
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  font-weight: 700;
 }
 
-.blog-article ul, .blog-article ol {
+.content-body ul,
+.content-body ol {
   margin-bottom: 1.5rem;
   padding-left: 1.5rem;
 }
 
-.blog-article li {
+.content-body li {
   margin-bottom: 0.5rem;
-  font-size: 1.05rem;
 }
 
-/* ==========================================================================
-   BLOG DISPATCHES LIST (.docx & .md Parsed List)
-   ========================================================================== */
-.blog-list {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  margin-top: 1rem;
-}
-
-.blog-item-card {
-  display: flex;
-  flex-direction: column;
-  background-color: var(--bg-primary);
-  border: 1px solid var(--border-color);
-  padding: 1.25rem 1.5rem;
-  border-radius: 2px;
-  cursor: pointer;
-  transition: border-color 0.2s ease, transform 0.15s ease;
-}
-
-.blog-item-card:hover {
-  border-color: var(--accent-crimson);
-  transform: translateX(4px);
-}
-
-.blog-item-card .blog-item-title {
-  font-size: 1.2rem;
-  font-weight: 700;
-  color: var(--text-primary);
-}
-
-.blog-item-card .blog-item-source {
-  font-size: 0.75rem;
-  color: var(--accent-crimson);
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  margin-top: 0.3rem;
-}
-
-.blog-item-card .blog-item-preview {
-  font-size: 0.9rem;
-  color: var(--text-muted);
-  margin-top: 0.5rem;
-}
-
-/* Loading & Empty States */
-.state-indicator {
-  padding: 2rem;
-  text-align: center;
-  color: var(--text-muted);
+.content-body blockquote {
+  border-left: 4px solid var(--border-color);
+  padding-left: 1.2rem;
+  margin: 1.8rem 0;
   font-style: italic;
+  color: #222;
 }
 
-/* Footer Notice */
-.site-footer {
-  margin-top: auto;
+.content-body a {
+  color: var(--text-color);
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  font-weight: 700;
+}
+
+.content-body hr {
+  border: none;
   border-top: 1px solid var(--border-color);
-  padding: 2rem 1.5rem;
-  text-align: center;
-  font-size: 0.8rem;
-  color: var(--text-dim);
+  margin: 2.5rem 0;
 }
 
-/* Responsive adjustments */
-@media (max-width: 859px) {
-  .fixed-logo-header {
-    top: 1rem;
-    left: 1rem;
-    right: 1rem;
-    justify-content: flex-start;
+/* Blog Specific Pattern - Centered Container */
+.blog-layout-container {
+  width: 100%;
+  max-width: var(--blog-max-width);
+  margin: 0 auto;
+}
+
+.blog-post-header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.blog-post-title {
+  font-size: 2.4rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.blog-post-meta {
+  font-size: 0.9rem;
+  color: var(--muted-color);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.blog-post-body p {
+  text-align: left;
+  margin-bottom: 1.6rem;
+}
+
+/* Docx Blog List & Reader Component */
+.docx-blog-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.docx-item {
+  border: 1px solid var(--border-color);
+  padding: 1.5rem;
+  background-color: var(--card-bg);
+  cursor: pointer;
+}
+
+.docx-item-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 0.4rem;
+}
+
+.docx-item-snippet {
+  font-size: 0.95rem;
+  color: var(--muted-color);
+}
+
+.docx-viewer {
+  display: none;
+  margin-top: 2rem;
+  border-top: 1px solid var(--border-color);
+  padding-top: 2rem;
+}
+
+.docx-back-btn {
+  display: inline-block;
+  margin-bottom: 1.5rem;
+  padding: 0.4rem 0.8rem;
+  border: 1px solid var(--border-color);
+  background-color: var(--card-bg);
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: none;
+  color: var(--text-color);
+}
+
+/* Responsive Media Queries */
+@media (max-width: 900px) {
+  :root {
+    --header-height: 140px;
   }
+
+  .site-header {
+    height: auto;
+    position: relative;
+    padding: 1rem;
+  }
+
+  .site-logo {
+    max-height: 100px;
+  }
+
   .site-layout {
-    padding: 5rem 1.25rem 2rem 1.25rem;
+    margin-top: 0;
+    flex-direction: column-reverse;
   }
-  .toc-grid {
-    grid-template-columns: 1fr;
+
+  .toc-sidebar {
+    position: static;
+    height: auto;
+    width: 100%;
+    min-width: 100%;
+    border-left: none;
+    border-top: 1px solid var(--border-color);
   }
-  .toc-card.rotate-left, .toc-card.rotate-right {
-    transform: rotate(0deg); /* disable aggressive tilt on small touchscreens */
+
+  .toc-nav {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .toc-link {
+    width: auto;
+  }
+
+  .main-content {
+    margin-right: 0;
+    padding: 2rem 1.5rem;
+    max-width: 100%;
   }
 }

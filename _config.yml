@@ -1,61 +1,39 @@
-title: Anemone
-tagline: Analog perspective.
-description: An ultra-minimal, hypermedia-focused magazine site for Anemone.
-url: "https://anemonereview.com"
-baseurl: ""
+# Anemone Magazine - Site Configuration
+title: "Anemone"
+description: "Analog perspective."
+url: "" # host url
+baseurl: "" # subpath if any
 
-# Site Branding & Media
-logo: "asset/anemonelogo1.png"
-favicon: "asset/anemonelogo1.png"
+# Author / Editorial Info
+editor_email: "staff@anemonereview.com"
+current_issue: "Vol. 1, No. 1 (July 2026)"
+next_submission_deadline: "Vol. 1, No. 2 due October 1, 2026"
 
-# Typography & Aesthetic Parameters
+# Design & Layout Settings (Parameterized)
 font_family: "'Atkinson Hyperlegible', sans-serif"
+bg_color: "#f7f7f5"
+text_color: "#121212"
+accent_color: "#000000"
 
-# Color Palette (Dark Gothic - Solid Colors, No Complex Gradients)
-colors:
-  bg_primary: "#0c0c0e"
-  bg_secondary: "#141417"
-  text_primary: "#e2e0d8"
-  text_muted: "#9c9a92"
-  accent_crimson: "#9e2a2b"
-  accent_crimson_hover: "#c1121f"
-  border_color: "#26262a"
-
-# Table of Contents Rotations
-rotation_left: "-1.8deg"
-rotation_right: "1.5deg"
-
-# Table of Contents Items
-toc_items:
-  - title: "Letter from the Editor"
-    slug: "editor-letter"
-    url: "pages/editor-letter.html"
-    type: "page"
-    rotation: "left"
+# TOC Links & Parameters (Fixed permalinks ending in .html)
+toc_links:
+  - title: "Main / Home"
+    url: "/"
+  - title: "Letter from Editor"
+    url: "/letter-from-editor.html"
   - title: "Submission Guidelines"
-    slug: "submission"
-    url: "pages/submission.html"
-    type: "page"
-    rotation: "right"
-  - title: "Advertise & Patronage"
-    slug: "advertise"
-    url: "pages/advertise.html"
-    type: "page"
-    rotation: "left"
-  - title: "Issue Archive (Vol. 1, No. 1)"
-    slug: "download"
-    url: "pages/download.html"
-    type: "page"
-    rotation: "right"
-  - title: "Blog Dispatches (.docx Reader)"
-    slug: "blog-dispatches"
-    url: "#blog-dispatches"
-    type: "blog_index"
-    rotation: "left"
+    url: "/submission-guidelines.html"
+  - title: "Advertise"
+    url: "/advertise.html"
+  - title: "Docx Blog Archive"
+    url: "/blogs.html"
 
-# Build Settings
+# Jekyll Build Settings
 markdown: kramdown
-permalink: /:categories/:title/
-include:
-  - asset
-  - blogs
+permalink: /:basename.html
+include: ["pages"]
+exclude:
+  - README.md
+  - old site/
+  - _site/
+  - Gemfile.lock

@@ -1,29 +1,20 @@
-<!-- Table of Contents Column Grid with Off-Center Rotations -->
-<section class="toc-section" aria-label="Table of Contents">
-  <div class="toc-header">Table of Contents &bull; Issue Directory</div>
-  <div class="toc-grid">
-    {% for item in site.toc_items %}
-      <div 
-        class="toc-card rotate-{{ item.rotation }}" 
-        data-slug="{{ item.slug }}"
-        data-url="{{ site.baseurl }}/{{ item.url }}"
-        data-type="{{ item.type }}"
-        data-title="{{ item.title }}"
-        role="button"
-        tabindex="0"
-      >
-        <div>
-          <div class="toc-number">SECTION 0{{ forloop.index }}</div>
-          <div class="toc-title">{{ item.title }}</div>
-        </div>
-        <div class="toc-desc">
-          {% if item.type == 'blog_index' %}
-            Browse dispatches parsed from folder of .docx files.
-          {% else %}
-            View article &bull; Direct hypermedia reader.
-          {% endif %}
-        </div>
-      </div>
+<aside class="toc-sidebar" id="toc-sidebar">
+  <div class="toc-title">Table of Contents</div>
+  <nav class="toc-nav" aria-label="Main Navigation">
+    {% for item in site.toc_links %}
+      {% assign is_active = false %}
+      {% if page.url == item.url or page.url == item.url | append: ".html" or page.url == item.url | append: "/" %}
+        {% assign is_active = true %}
+      {% endif %}
+      <a href="{{ item.url | relative_url }}" class="toc-link{% if is_active %} active{% endif %}">
+        {{ item.title }}
+      </a>
     {% endfor %}
+  </nav>
+
+  <div class="toc-info">
+    <p><strong>{{ site.title }}</strong></p>
+    <p>{{ site.description }}</p>
+    <p style="margin-top: 0.5rem; font-size: 0.8rem;">{{ site.current_issue }}</p>
   </div>
-</section>
+</aside>

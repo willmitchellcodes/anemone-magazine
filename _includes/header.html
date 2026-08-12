@@ -1,12 +1,5 @@
-<!-- Fixed Top-Left Logo Header (Rule Requirement) -->
-<header class="fixed-logo-header" aria-label="Site Header">
-  <a href="{{ site.baseurl }}/" title="{{ site.title }} - Home" style="display: flex; align-items: center; gap: 0.75rem;">
-    {% if site.logo %}
-      <img src="{{ site.baseurl }}/{{ site.logo }}" alt="{{ site.title }} Logo" />
-    {% endif %}
-    <div>
-      <span class="site-title">{{ site.title }}</span>
-      <span class="site-tagline">{{ site.tagline }}</span>
-    </div>
+<header class="site-header" id="site-header">
+  <a href="{{ '/' | relative_url }}" class="logo-link" title="{{ site.title }} - {{ site.description }}">
+    <img src="{{ '/asset/anemonelogo1.png' | relative_url }}" alt="{{ site.title }} Logo" class="site-logo" />
   </a>
 </header>
